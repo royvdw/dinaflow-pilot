@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@700&family=Poppins:wght@400;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-funnel-display: "Funnel Display", sans-serif;
+    --font-poppins: "Poppins", sans-serif;
+  }
+}
+
+@layer base {
+  html {
+    font-family: system-ui, sans-serif;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-funnel-display);
+  }
+
+  h1 {
+    font-size: xx-large;
+  }
+
+  h2 {
+    font-size: x-large;
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: large;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply py-4 px-5 rounded-full font-medium w-fit duration-200 text-base;
+  }
+
+  .btn-primary {
+    @apply bg-white text-black hover:px-7;
+  }
+
+  header {
+    background: linear-gradient(126.33deg, #ff0051 15.18%, #9100ff 84.84%);
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+
+  .header-img {
+  }
+
+  .icon {
+    height: 33px;
+    width: auto;
+  }
+
+  .usp-item {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    font-family: var(--font-funnel-display);
+  }
+
+  h3.usp-item::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('/src/assets/ping.svg');
+    background-size: cover;
+  }
+}
