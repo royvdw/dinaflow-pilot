@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: "22"
       - name: Install Dependencies
-        run: npm install # Dit installeert vite en andere pakketten
+        run: npm install
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
