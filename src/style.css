@@ -66,11 +66,23 @@
   }
 
   h3.usp-item::before {
-    content: '';
+    content: "";
     width: 40px;
     height: 40px;
     display: block;
-    background-image: url('/src/assets/ping.svg');
+    background-image: url("/src/assets/ping.svg");
     background-size: cover;
+  }
+}
+
+@keyframes float-up {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  100% {
+    opacity: 100;
+    transform: translateY(0px);
   }
 }
