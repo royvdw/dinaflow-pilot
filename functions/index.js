@@ -1,32 +1,50 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+// IMPORTEER SPECIFIEKE FUNCTIES VAN FIREBASE-ADMIN
+import { initializeApp } from "firebase-admin/app";
 
-const {setGlobalOptions} = require("firebase-functions");
-const {onRequest} = require("firebase-functions/https");
-const logger = require("firebase-functions/logger");
+// IMPORTEER ANDERE AFHANKELIJKHEDEN
+import * as functions from "firebase-functions";
+import cors from "cors";
+import * as nodemailer from "nodemailer";
 
-// For cost control, you can set the maximum number of containers that can be
-// running at the same time. This helps mitigate the impact of unexpected
-// traffic spikes by instead downgrading performance. This limit is a
-// per-function limit. You can override the limit for each function using the
-// `maxInstances` option in the function's options, e.g.
-// `onRequest({ maxInstances: 5 }, (req, res) => { ... })`.
-// NOTE: setGlobalOptions does not apply to functions using the v1 API. V1
-// functions should each use functions.runWith({ maxInstances: 10 }) instead.
-// In the v1 API, each function can only serve one request per container, so
-// this will be the maximum concurrent request count.
-setGlobalOptions({ maxInstances: 10 });
+// INITIALISEER DE FIREBASE ADMIN SDK
+initializeApp();
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+/* gmail credentials */
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "bigbangdesigns@gmail.com",
+    pass: "bgca cktj euxv ozud",
+  },
+});
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+const corsHandler = cors({
+  origin: true,
+});
+
+export const sendMailOverHTTP = functions.https.onRequest((req, res) => {
+  corsHandler(req, res, () => {
+    const mailOptions = {
+      from: "noreply@dinaflow.com",
+      to: "mrroywesten@hotmail.com",
+      subject: "Reply on the contactform",
+      html: `<h1>Pilot Form Message</h1>
+             <p>
+               <b>Email: </b>${req.body.email}<br>
+               <b>Name: </b>${req.body.name}<br>
+               <b>Telephone: </b>${req.body.telephone}<br>
+               <b>Message: </b>${req.body.message}<br>
+             </p>`,
+    };
+
+    return transporter.sendMail(mailOptions, (error, data) => {
+      if (error) {
+        return res.send(error.toString());
+      }
+
+      return res.send(data);
+    });
+  });
+});

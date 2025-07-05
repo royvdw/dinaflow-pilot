@@ -250,7 +250,11 @@
         <section class="max-w-5xl mx-auto p-8 md:p-0 py-16 md:py-32">
           <h2 class="mb-8">Meld je aan voor ons pilot programma</h2>
           <div class="flex w-full flex-col md:flex-row gap-16">
-            <form class="flex flex-col gap-6 flex-1" autocomplete="on">
+            <form
+              class="flex flex-col gap-6 flex-1"
+              id="pilot-form"
+              autocomplete="on"
+            >
               <div class="flex flex-col gap-2">
                 <label for="company" class="font-semibold">Bedrijfsnaam</label>
                 <input
@@ -284,9 +288,12 @@
                   placeholder="Telefoonnummer"
                 />
               </div>
-              <button type="submit" class="btn btn-primary mt-4">
+
+              <button class="btn btn-primary mt-4" type="submit">
                 Aanmelden
               </button>
+
+              <div id="formMessage" class="message"></div>
             </form>
 
             <div class="w-full md:w-1/2 flex-1 flex flex-col gap-6">
