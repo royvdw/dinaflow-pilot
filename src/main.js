@@ -35,18 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // VOOR NU: laat deze leeg of gebruik een placeholder.
     // Zodra je gedeployed hebt, vind je de URL in de Firebase Console onder Functions.
     const firebaseFunctionUrl =
-      "https://sendmailoverhttp-s6dtwf7rda-uc.a.run.app"; // *** BELANGRIJK: VERVANG DEZE! ***
-
-    if (
-      !firebaseFunctionUrl ||
-      firebaseFunctionUrl === "https://sendmailoverhttp-s6dtwf7rda-uc.a.run.app"
-    ) {
-      formMessage.textContent =
-        "Fout: Firebase Function URL is nog niet geconfigureerd.";
-      formMessage.className = "message error";
-      return;
-    }
-
+      "https://sendmailoverhttp-s6dtwf7rda-uc.a.run.app";
     formMessage.textContent = "Verzenden...";
     formMessage.className = "message";
 
